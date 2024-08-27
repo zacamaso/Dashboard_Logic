@@ -10,16 +10,16 @@ def convert_to_date_id(input_date):
     return (input_date - base_date).days + 1
 
 # Define the functions using date_id
-def is_booked_revenue(book_date_id, order_status_id, vSelectedDate1, vSelectedDate2):
+def is_booked_revenue(book_date_id, order_status_id, vSelectedDate):
 
     try:
-        if vSelectedDate1 <= book_date_id <= vSelectedDate2 and order_status_id <= 2:
+        if book_date_id == vSelectedDate and order_status_id <= 2:
             return True
         return False
     except:
         return False
 
-def is_waiting_for_payment(order_date_id, order_status_id, vSelectedDate1, vSelectedDate2, book_date_id):
+def is_waiting_for_payment(order_date_id, order_status_id, vSelectedDate, book_date_id):
     try:
         if book_date_id is None and vSelectedDate1 <= order_date_id <= vSelectedDate2 and order_status_id <= 3:
             return True
@@ -100,7 +100,7 @@ lost_revenue = is_lost_revenue(order_date_id, order_status_id, vSelectedDate1, v
 st.markdown("Booked Revenue")
 st.code('''
 
-if vSelectedDate1 <= book_date_id <= vSelectedDate2 and order_status_id <= 2:
+if book_date_id <= vSelectedDate and order_status_id <= 2:
     return True
 return False
 ''', language='python')
@@ -110,9 +110,9 @@ st.code(booked_revenue)
 # Function 2: is_waiting_for_payment
 st.markdown("Waiting for Payment")
 st.code('''
-if (vSelectedDate1 <= order_date_id <= vSelectedDate2 and 
+if (order_date_id <= vSelectedDate and 
     order_status_id <= 3 and 
-    (book_date_id >= vSelectedDate2 or book_date_id is None)):
+    (book_date_id >= vSelectedDate or book_date_id == 'null)):
     return True
 return False
 ''', language='python')

@@ -21,35 +21,35 @@ data = {'order_status_id': [1, 2, 3, 4, 5, 6, 7, 8, 9], 'order_status_name': ['C
 df = pd.DataFrame(data) 
 print(df)
 
-# Dimension: Date Range Picker [vSelectedDate1, vSelectedDate2]
+# Dimension: Single Date Picker [vSelectedDate]
 
 # # Metric 1: Booked Revenue
 # Initialize variables
 book_date_id =  0
 status = ''
-vSelectedDate1 = 0
-vSelectedDate2 = 0
+vSelectedDate = 0
+vSelectedDate = 0
 order_status_id = 0
 order_date_id = 0
 booked_revenue = 0
 
+# Date picker filters by order_date_id
+
 # # Metric 1: Booked Revenue
 
-def is_booked_revenue(book_date_id, order_status_id, vSelectedDate1, vSelectedDate2):
+def is_booked_revenue(book_date_id, order_status_id, vSelectedDate):
 
-    if book_date_id >= vSelectedDate1 and book_date_id <= vSelectedDate2 and order_status_id <= 2:
+    if book_date_id == vSelectedDate and order_status_id <= 2:
+        Sum(total_charge_amount)
 
-        return True
-    return False
 
 
 # # Metric 2: Waiting for payment
 
-def is_waiting_for_payment(order_date_id, order_status_id, vSelectedDate1, vSelectedDate2):
+def is_waiting_for_payment(order_date_id, order_status_id, vSelectedDate):
 
-    if order_date_id >= vSelectedDate1 and order_date_id <= vSelectedDate2 and order_status_id <= 3:
-        return True
-    return False
+    if order_date_id <= vSelectedDate and order_status_id <= 3 and (book_date_id) >= vSelectedDate or book_date_id == 'null':
+        Sum(total_charge_amount)
 
 
 # # Metric 3: Lost Revenue (Cancelled, ON HOLD, DELETED, etc.)
